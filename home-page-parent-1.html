@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Parent home page</title>
+	<style>
+		body {
+                  background-color: #141e35;
+			margin: 0;
+			padding: 0;
+		}
+.forms-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 1300px;
+  height: 500px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(0,0,0,.5);
+  box-shadow: 0 15px 25px rgba(0,0,0,.6);
+}
+            .underline-hover {
+    text-decoration: none;
+    position: relative;
+  }
+  .underline-hover::after {
+  content: '';
+  display: block;
+  height: 2px;
+  width: 0;
+  background-color:#0189a3 ;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  transition: width 0.3s ease-in-out;
+}
+
+.underline-hover:hover::after {
+  width: 100%;
+}
+
+
+
+		nav {
+			background-color: #333;
+			color: #fff;
+			display: flex;
+			justify-content: flex-end;
+			padding: 10px;
+		}
+		nav a {
+			color: #fff;
+			margin-left: 10px;
+			text-decoration: none;
+		}
+		nav a:hover {
+			text-decoration: underline;
+			background-color: #fff;
+			color: #333;
+			padding: 5px 10px;
+			border-radius: 5px;
+		}
+		#child-display {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			padding: 20px;
+		}
+		.child-card {
+			background-color: #eee;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			display: flex;
+			flex-direction: column;
+			margin: 10px;
+			padding: 10px;
+			text-align: center;
+			width: 200px;
+		}
+		.child-card img {
+			border-radius: 50%;
+			height: 100px;
+			margin-bottom: 10px;
+			width: 100px;
+		}
+		.child-card h3 {
+			margin: 0;
+		}
+		#add-child {
+			background-color: #333;
+			border: none;
+			border-radius: 50%;
+			bottom: 20px;
+			color: #fff;
+			font-size: 30px;
+			height: 60px;
+			position: fixed;
+			right: 20px;
+			width: 60px;
+			transition: all 0.3s ease-in-out;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+		}
+		#add-child:hover {
+			background-color: #fff;
+			color: #333;
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+			transform: scale(1.1);
+		}
+        .table{
+            width: 80vw;
+            display: flex;
+            justify-content: space-evenly;
+            color:white;
+        }
+        .table th:hover {
+            background-color: #333;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .table td {
+            padding: 1rem;
+            text-align: center;
+        }
+        .table tr:hover {
+            background-color: #f5f5f5;
+        }
+        button a {
+            color: #fff;
+            text-decoration: none;
+        }
+        button:hover a {
+            text-decoration: underline;
+        }
+	</style>
+
+</head>
+	<nav>
+		<a href="{{ url_for('home') }}">Home</a>
+		<a href="{{ url_for('keylogger') }}">Keylogger</a>
+		<a href="#">Contact Us</a>
+		<a href="#">Downloads</a>
+	</nav>
+<body>
+<h1 align="left" style="color:#0189a3; text-decoration:underline;">Parental Control System</h1>
+    <div class="forms-container">
+    <h1 style="color:white" align="center" class="underline-hover">Child Display</h1>
+    <table>
+        <thead>
+            <tr class="table">
+                <th>Photo&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                <th>Name</th>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date of Birth</th>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ID</th>
+                <th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;notification</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for child in children %}
+            <tr class="table">
+                <td class="table-column"><img src="{{ url_for('static', filename='Child_uploads/' + child['image']) }}" alt="{{ child['name'] }}" style="width:20vw; aspect-ratio: 1.2; margin-bottom: 1rem;"></td>
+                <td>{{ child['name'] }}</td>
+                <td>{{ child['dob'] }}</td>
+                <td>{{ child['_id'] }}</td>
+                <td><button id="notifications"> <a href="{{ url_for('notification') }}"><img src="D:\Downloads\notification.png" width="10"></a></button></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+	<button id="add-child"> <a href="{{ url_for('create_child') }}">+</a></button>
+</body>
+</html>

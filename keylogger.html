@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Keylogger</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Add Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/css/bootstrap.min.css"
+        integrity="sha384-GL8VI1TebKtvDL+H+mD40DFF8ewvEgefDCkmKjFmTYBJnPSgT1eKIBjPiCzniex/" crossorigin="anonymous">
+    <style>
+        body {
+            background-color: #141e35   }
+
+        .forms-container {
+             position: absolute;
+             top: 50%;
+             left: 50%;
+             transform: translate(-50%, -50%);
+             width: 400px;
+             height: 500px;
+             border: none;
+             border-radius: 10px;
+             background: rgba(0,0,0,.5);
+             box-shadow: 0 15px 25px rgba(0,0,0,.6);
+}
+    
+        h2 {
+            color: #fff;
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            text-decoration: underline;
+        }
+        label {
+            color:white;
+            font-size: 1.5rem;
+        }
+        #downloadButton {
+            background-color: tran          
+            border-color: #007bff;
+            font-size: 1.5rem;
+            font-weight: 500;
+            margin-top: 2rem;
+        }
+        #downloadButton:hover {
+            background-color: #141e38        
+            border-color: #005cbf;
+            transform: scale(1.05);
+        }
+        #downloadButton:focus {
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+        }
+    </style>
+</head>
+<body>
+<h1 align="left" style="color:#0189a3; text-decoration:underline;">Parental Control System</h1>
+<div align="center" class="forms-container">
+<div class="container mt-5">
+    <h2 class="text-center">Keylogger</h2	>
+    <form id="toggleForm" class="text-center mt-4">
+        <div class="form-check form-switch">
+    <input class="form-check-input" type="checkbox" id="toggleCheckbox">
+    <label class="form-check-label" for="toggleCheckbox">Toggle Keylogger</label>
+</div>
+    </form>
+
+
+    <button id="downloadButton" class="btn btn-primary btn-lg btn-block">GET THIS REPORT</button>
+            <button id="downloadButton" class="btn btn-primary btn-lg btn-block"> <a href="{{ url_for('nlp_run') }}">SUMMARIZE THIS REPORT</a></button>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $("#toggleCheckbox").change(function () {
+                    var isChecked = $(this).prop("checked");
+                    var url = isChecked ? "/toggle" : "/toggle";
+                    $.post(url, function (data) {
+                        if (data.status === "success") {
+                            console.log("Toggle success");
+                        } else {
+                            console.log("Toggle failed");
+                        }
+                    });
+                });
+                $("#downloadButton").click(function () {
+            window.location.href = "/download_keylogger";
+        });
+    });
+</script>
+<!-- Add Bootstrap JS for transitions -->
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCW2KfM9+KCAVpFYY5EnGK/nKfFF87pFp+VXJhKkNl" crossorigin="anonymous">
+</script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.6.0/js/bootstrap.min.js"
+    integrity="sha384-Mr1CQe1HtzJdc0QU+PFO+Lj6HRa+6duH4yaNraZg8Ndm+VKKUfjFpja4Gy+x/4=" crossorigin="anonymous">
+</script>
+</body>
+</html>

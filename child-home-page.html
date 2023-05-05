@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Child home page</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+		}
+		nav {
+			background-color: #333;
+			color: #fff;
+			display: flex;
+			justify-content: flex-end;
+			padding: 10px;
+		}
+		nav a {
+			color: #fff;
+			margin-left: 10px;
+			text-decoration: none;
+		}
+		nav a:hover {
+			text-decoration: underline;
+		}
+		#child-display {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: center;
+			padding: 20px;
+		}
+		.child-card {
+			background-color: #eee;
+			border-radius: 10px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			display: flex;
+			flex-direction: column;
+			margin: 10px;
+			padding: 10px;
+			text-align: center;
+			width: 200px;
+		}
+		.child-card img {
+			border-radius: 50%;
+			height: 100px;
+			margin-bottom: 10px;
+			width: 100px;
+		}
+		.child-card h3 {
+			margin: 0;
+		}
+		#add-child {
+			background-color: #333;
+			border: none;
+			border-radius: 50%;
+			bottom: 20px;
+			color: #fff;
+			font-size: 30px;
+			height: 60px;
+			position: fixed;
+			right: 20px;
+			width: 60px;
+		}
+        .table{
+            width: 80vw;
+            display: flex;
+            justify-content: space-evenly;
+
+        }
+	</style>
+
+</head>
+<body>
+	<nav>
+		<a href="{{ url_for('home') }}">Home</a>
+		<!-- <a href="{{ url_for('keylogger') }}">Keylogger</a> -->
+		<a href="#">Contact Us</a>
+		<!-- <a href="#">Downloads</a> -->
+	</nav>
+    <!-- <h1>Child Display</h1> -->
+    <table>
+        <thead>
+            <tr class="table">
+                <th>Photo</th>
+                <th>Name</th>
+                <th>Date of Birth</th>
+                <th>ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for child in children %}
+            <tr class="table">
+                <td class="table-column"><img src="{{ url_for('static', filename='Child_uploads/' + child['image']) }}" alt="{{ child['name'] }}" style="width:20vw; aspect-ratio: 1.2; margin-bottom: 1rem;"></td>
+                <td>{{ child['name'] }}</td>
+                <td>{{ child['dob'] }}</td>
+                <td>{{ child['_id'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+	<!-- <button id="notifications"> <a href="{{ url_for('notification') }}">Notifications</a></button> -->
+
+	<button id="add-child"> <a href="{{ url_for('view_inbox') }}">✉️</a></button> 
+</body>
+</html>

@@ -1,0 +1,59 @@
+<body>
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1 style="text-align: center;color:white;">Downloads</h1>
+  <div class="downloads-container">
+    {% if files %}
+      <ul class="downloads-list">
+        {% for file in files %}
+          <li class="downloads-item">
+            <a class="download-link" href="{{ url_for('download', file_id=file.id) }}">
+              {{ file.timestamp.strftime('%Y-%m-%d %H:%M:S') }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p>No files available for download.</p>
+    {% endif %}
+  </div>
+{% endblock %}
+</body>
+<style>
+  .downloads-container {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  }
+ body{
+ color:grey;	
+  background: linear-gradient(#141e30, #243b55);
+  }
+  .downloads-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .downloads-item {
+    margin-bottom: 10px;
+  }
+
+  .download-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #428bca;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.2s ease-in-out;
+  }
+
+  .download-link:hover {
+    background-color: #3071a9;
+  }
+</style>
